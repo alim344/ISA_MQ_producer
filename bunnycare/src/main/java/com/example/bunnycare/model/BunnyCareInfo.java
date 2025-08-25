@@ -12,6 +12,9 @@ public class BunnyCareInfo {
     @Column(unique = true)
     private String shelter_name;
 
+    @Column
+    private CareType type;
+
    @OneToOne(cascade = CascadeType.ALL)       //moze i many to one, ako npr u istoj zgradi ima vise veterinara
    @JoinColumn(name = "location_id", unique = true)
    private Location location;

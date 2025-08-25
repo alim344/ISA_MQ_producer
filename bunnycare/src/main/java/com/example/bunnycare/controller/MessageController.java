@@ -1,14 +1,14 @@
 package com.example.bunnycare.controller;
 
 import com.example.bunnycare.model.BunnyCareInfo;
+import com.example.bunnycare.service.BunnyInfoService;
 import com.example.bunnycare.service.Producer;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 public class MessageController {
@@ -16,10 +16,21 @@ public class MessageController {
     @Autowired
     private Producer producer;
 
-    @PostMapping("send")
-   public String sendMessage(@RequestParam BunnyCareInfo bunnyCareInfo) {
-        producer.sendMessage(bunnyCareInfo);
-        return bunnyCareInfo.getShelter_name() +"Message sent";
+    @Autowired
+    private BunnyInfoService bunnyInfoService;
+
+    @PostMapping("send/{info_id}")
+   public String sendMessage(@PathVariable Long info_id) {
+
+        BunnyCareInfo info = bunnyInfoService.findById(info_id);
+        if(info != null) {
+            producer.sendMessage(info);
+            return info.getShelter_name() +"Message sent";
+        }
+
+        return "Info not found boo";
+
+
     }
 
 
