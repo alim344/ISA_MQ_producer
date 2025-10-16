@@ -19,6 +19,13 @@ public class BunnyCareInfo {
    @JoinColumn(name = "location_id", unique = true)
    private Location location;
 
+    public CareType getType() {
+        return type;
+    }
+
+    public void setType(CareType type) {
+        this.type = type;
+    }
 
     public Long getId() {
         return id;

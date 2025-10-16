@@ -2,9 +2,11 @@ package com.example.bunnycare.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 
 @Entity
-public class Location {
+public class Location implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -18,7 +20,7 @@ public class Location {
     private double longitude;
 
     @Column(nullable = false)
-    private String address;
+    private String adress;
 
 
 
@@ -30,8 +32,8 @@ public class Location {
         return longitude;
     }
 
-    public String getAddress() {
-        return address;
+    public String getAdress() {
+        return adress;
     }
 
     public void setId(Long id) {
@@ -50,7 +52,7 @@ public class Location {
         this.longitude = longitude;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
 }

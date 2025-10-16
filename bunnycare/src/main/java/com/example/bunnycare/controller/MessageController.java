@@ -25,7 +25,7 @@ public class MessageController {
         BunnyCareInfo info = bunnyInfoService.findById(info_id);
         if(info != null) {
             producer.sendMessage(info);
-            return info.getShelter_name() +"Message sent";
+            return info.getType() +"Message sent";
         }
 
         return "Info not found boo";
